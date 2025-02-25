@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la tâche{% endblock %}
+
+{% block body %}
+    <h1>Modifier la tâche</h1>
+
+    {{ include('task/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+    <div class="d-flex mt-3">
+        <a href="{{ path('task_index') }}" class="btn btn-secondary me-2">Retour à la liste</a>
+        <form method="post" action="{{ path('task_delete', {'id': task.id}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ task.id) }}">
+            <button class="btn btn-danger">Supprimer</button>
+        </form>
+    </div>
+{% endblock %}
